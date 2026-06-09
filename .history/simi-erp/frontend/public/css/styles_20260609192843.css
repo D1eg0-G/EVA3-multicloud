@@ -290,16 +290,16 @@ footer {
         justify-content: center;
         text-align: center;
     }
-
+    
     main {
         padding: 0 1rem;
         margin: 1rem auto;
     }
-
+    
     .card {
         padding: 1.5rem;
     }
-
+    
     .form-grid {
         grid-template-columns: 1fr;
     }
