@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP Farmacia SIMI — Gestión y Seguridad</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <span class="logo">🏥</span>
+      <div>
+        <h1>ERP Farmacia SIMI</h1>
+        <span class="subtitle">Sistema de Gestión y Control de Acceso</span>
+      </div>
+      <button id="btnCerrarSesion" style="display: none; margin-left: auto; background: var(--rojo); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="seccionAuth">
+      <div id="pasoLogin" class="card step activo">
+        <h2>🔒 Iniciar Sesión</h2>
+        <div class="form-grid" style="grid-template-columns: 1fr;">
+          <div class="form-group">
+            <label>Usuario</label>
+            <input type="text" id="authUsername" placeholder="admin">
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" id="authPassword" placeholder="••••••••">
+          </div>
+          <div id="msgAuth" class="full"></div>
+          <button type="button" id="btnLogin" class="full">Ingresar</button>
+        </div>
+      </div>
+
+      <div id="pasoMfaSetup" class="card step">
+        <h2>📱 Configurar Autenticador</h2>
+        <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;">Escanea el código QR en Google Authenticator e ingresa los 6 dígitos.</p>
+        <img id="qrImg" src="" alt="QR" style="display: block; margin: 0 auto 1rem auto; border: 4px solid var(--verde); border-radius: 8px;">
+        <div class="form-group">
+          <label>Código TOTP</label>
+          <input type="text" id="codigoSetup" maxlength="6" placeholder="123456">
+        </div>
+        <button type="button" id="btnActivarMfa" class="full" style="margin-top: 1rem;">Activar y Entrar</button>
+      </div>
+
+      <div id="pasoMfaVerify" class="card step">
+        <h2>🔑 Verificación en 2 pasos</h2>
+        <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;">Ingresa el código de 6 dígitos de tu app.</p>
+        <div class="form-group">
+          <label>Código TOTP</label>
+          <input type="text" id="codigoVerify" maxlength="6" placeholder="123456">
+        </div>
+        <button type="button" id="btnVerificarMfa" class="full" style="margin-top: 1rem;">Verificar</button>
+      </div>
+    </div>
+
+    <div id="seccionDashboard" style="display: none;">
+      <div class="card">
+        <h2>Ingresar nuevo producto</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" placeholder="Ej: Paracetamol 500mg">
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoría</label>
+            <select id="categoria">
+              <option value="General">General</option>
+              <option value="Analgésicos">Analgésicos</option>
+              <option value="Antibióticos">Antibióticos</option>
+              <option value="Antiinflamatorios">Antiinflamatorios</option>
+              <option value="Antialérgicos">Antialérgicos</option>
+              <option value="Gastrointestinal">Gastrointestinal</option>
+              <option value="Vitaminas">Vitaminas</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="precio">Precio (CLP) *</label>
+            <input type="number" id="precio" min="0" step="1" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" id="stock" min="0" step="1" placeholder="0">
+          </div>
+          <div class="form-group full">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" placeholder="Descripción del producto..."></textarea>
+          </div>
+          <div id="mensaje" class="full"></div>
+          <button type="button" id="btnGuardar" class="full">Guardar producto</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Listado de productos</h2>
+        <div id="loading">Cargando productos...</div>
+        <table id="tablaProductos">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyProductos"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>ERP Farmacia SIMI · Evaluación N°3 TI3053 · Arquitectura Multicloud Segura</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+</body>
+</html>
